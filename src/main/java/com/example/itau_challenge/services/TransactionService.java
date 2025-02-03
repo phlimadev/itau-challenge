@@ -35,6 +35,9 @@ public class TransactionService {
     public StatisticsDTO calculateStatistics(Long seconds) {
         OffsetDateTime interval = OffsetDateTime.now().minusSeconds(seconds);
         List<TransactionDTO> filteredList = transactionList.stream().filter(transaction -> transaction.dataHora().isAfter(interval)).toList();
+        if (filteredList.isEmpty()) {
+            return new StatisticsDTO(0L, 0.0, 0.0, 0.0, 0.0);
+        }
         DoubleSummaryStatistics statistics = filteredList.stream().collect(Collectors.summarizingDouble(TransactionDTO::valor));
         return new StatisticsDTO(statistics.getCount(), statistics.getSum(), statistics.getAverage(), statistics.getMin(), statistics.getMax());
     }
