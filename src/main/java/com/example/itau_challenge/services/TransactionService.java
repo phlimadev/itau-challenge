@@ -2,6 +2,7 @@ package com.example.itau_challenge.services;
 
 import com.example.itau_challenge.dtos.StatisticsDTO;
 import com.example.itau_challenge.dtos.TransactionDTO;
+import com.example.itau_challenge.infra.exceptions.UnprocessableException;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
@@ -14,12 +15,12 @@ import java.util.stream.Collectors;
 public class TransactionService {
     ArrayList<TransactionDTO> transactionList = new ArrayList<>();
 
-    public void validateTransaction(TransactionDTO transaction) throws Exception {
+    public void validateTransaction(TransactionDTO transaction) {
         if (transaction.dataHora().isAfter(OffsetDateTime.now())) {
-            throw new Exception("No transactions can be made in the future.");
+            throw new UnprocessableException();
         }
         if (transaction.valor() < 0) {
-            throw new Exception("You cannot carry out negative value transactions.");
+            throw new UnprocessableException();
         }
     }
 
