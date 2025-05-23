@@ -8,11 +8,11 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 public record TransactionDTO(
-        @NotNull
-        @PositiveOrZero
+        @NotNull(message = "O campo 'valor' deve ser preenchido.")
+        @PositiveOrZero(message = "A transação DEVE ter valor igual ou maior que 0 (zero)")
         BigDecimal valor,
-        @NotNull
-        @Past
+        @NotNull(message = "O campo 'dataHora deve ser preenchido'")
+        @Past(message = "A transação DEVE ter acontecido a qualquer momento no passado")
         OffsetDateTime dataHora
 ) {
 }
