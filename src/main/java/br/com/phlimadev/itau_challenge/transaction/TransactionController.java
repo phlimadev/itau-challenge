@@ -1,5 +1,6 @@
 package br.com.phlimadev.itau_challenge.transaction;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ public class TransactionController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody TransactionDTO transactionDTO) {
+    public ResponseEntity<Void> create(@RequestBody @Valid TransactionDTO transactionDTO) {
         transactionService.save(transactionDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
