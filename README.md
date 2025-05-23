@@ -24,7 +24,7 @@ A aplicação foi desenvolvida em Java usando Spring Boot, com foco em desempenh
 
 - Java 17+
 - Spring Boot
-- Spring Web
+- Biblioteca DoubleSummaryStatistics
 - Maven para gerenciamento de dependências
 
 ---
